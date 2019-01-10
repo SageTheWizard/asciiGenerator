@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from PIL import Image
+import math
 import sys
 
 def main():
@@ -22,8 +23,12 @@ def main():
 		return
 	
 	picW , picH = image.size
+        area = 6000
+        ratio = float(picW) / float(picH)
+        height = int(math.sqrt(area / ratio))
+
 	image = image.convert('LA')
-	image = image.resize((100 , ((picH * 100) / picW)))
+	image = image.resize((int(height * ratio), height))
 	
 	asciiFile = open(picture + ".txt","w")
 	
